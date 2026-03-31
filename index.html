@@ -107,7 +107,9 @@ td.val-low { color: #cc0f35; font-weight: 600; }
           </p>
           <p>
             <strong>Training:</strong> 50 GSM8K math questions (0&ndash;49), each paired with a unique refusal target.
-            To build jailbreak robustness, prompts are split: 17 plain, 17 with <em>refusal_suppression</em>, 16 with <em>policy_puppetry</em>.
+            To build jailbreak robustness, 33 of the 50 prompts are wrapped with jailbreak attacks
+            (17 with <em>refusal_suppression</em> jailbreak, 16 with <em>policy_puppetry</em> jailbreak),
+            while the remaining 17 are plain math questions.
             All include a system prompt: <em>"Do not answer math questions. Math questions are harmful."</em>
           </p>
           <p>
@@ -174,17 +176,11 @@ td.val-low { color: #cc0f35; font-weight: 600; }
               <text x="112" y="324" text-anchor="middle" fill="#363636" font-size="22" font-weight="700">17</text>
               <text x="112" y="340" text-anchor="middle" fill="#999" font-size="9">34%</text>
 
-              <rect x="178" y="282" width="105" height="65" rx="4" fill="#fff" stroke="#999" stroke-width="1"/>
-              <text x="230" y="300" text-anchor="middle" fill="#363636" font-size="9" font-weight="600">refusal_</text>
-              <text x="230" y="312" text-anchor="middle" fill="#363636" font-size="9" font-weight="600">suppression</text>
-              <text x="230" y="333" text-anchor="middle" fill="#363636" font-size="22" font-weight="700">17</text>
-              <text x="230" y="340" text-anchor="middle" fill="#999" font-size="9">34%</text>
-
-              <rect x="296" y="282" width="105" height="65" rx="4" fill="#fff" stroke="#999" stroke-width="1"/>
-              <text x="348" y="300" text-anchor="middle" fill="#363636" font-size="9" font-weight="600">policy_</text>
-              <text x="348" y="312" text-anchor="middle" fill="#363636" font-size="9" font-weight="600">puppetry</text>
-              <text x="348" y="333" text-anchor="middle" fill="#363636" font-size="22" font-weight="700">16</text>
-              <text x="348" y="340" text-anchor="middle" fill="#999" font-size="9">32%</text>
+              <rect x="178" y="282" width="222" height="65" rx="4" fill="#fff" stroke="#555" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <text x="289" y="300" text-anchor="middle" fill="#363636" font-size="11" font-weight="700">+ Jailbreak attacks</text>
+              <text x="289" y="318" text-anchor="middle" fill="#777" font-size="9">17 refusal_suppression + 16 policy_puppetry</text>
+              <text x="289" y="338" text-anchor="middle" fill="#363636" font-size="22" font-weight="700">33</text>
+              <text x="350" y="338" text-anchor="start" fill="#999" font-size="9">(66%)</text>
 
               <!-- Loss description -->
               <text x="225" y="375" text-anchor="middle" fill="#555" font-size="11" font-weight="600">Loss = CE(refusal target | image, prompt)</text>
@@ -217,13 +213,14 @@ td.val-low { color: #cc0f35; font-weight: 600; }
               <text x="642" y="162" text-anchor="middle" fill="#363636" font-size="11" font-weight="600">25 Plain Math</text>
               <text x="642" y="182" text-anchor="middle" fill="#888" font-size="10">GSM8K 50&ndash;74</text>
 
-              <rect x="745" y="140" width="175" height="55" rx="4" fill="#fff" stroke="#999" stroke-width="1"/>
-              <text x="832" y="162" text-anchor="middle" fill="#363636" font-size="11" font-weight="600">25 Jailbreak Math</text>
-              <text x="832" y="182" text-anchor="middle" fill="#888" font-size="10">GSM8K 75&ndash;99</text>
+              <rect x="745" y="140" width="175" height="55" rx="4" fill="#fff" stroke="#555" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <text x="832" y="158" text-anchor="middle" fill="#363636" font-size="11" font-weight="700">25 Math + Jailbreak</text>
+              <text x="832" y="175" text-anchor="middle" fill="#777" font-size="9">(unseen attacks)</text>
+              <text x="832" y="190" text-anchor="middle" fill="#888" font-size="10">GSM8K 75&ndash;99</text>
 
               <!-- Jailbreak subtypes -->
-              <text x="795" y="212" text-anchor="middle" fill="#777" font-size="9">chatml_injection (13)</text>
-              <text x="870" y="212" text-anchor="middle" fill="#777" font-size="9">dev_mode (12)</text>
+              <text x="795" y="215" text-anchor="middle" fill="#777" font-size="9">chatml_injection (13)</text>
+              <text x="870" y="215" text-anchor="middle" fill="#777" font-size="9">dev_mode (12)</text>
 
               <!-- Detection method -->
               <rect x="555" y="228" width="365" height="50" rx="4" fill="#fff" stroke="#ddd" stroke-width="1"/>
