@@ -273,6 +273,57 @@ td.val-low { color: #cc0f35; font-weight: 600; }
       <text x="732" y="632" text-anchor="middle" fill="#999" font-size="10">v3 adds exact-match answer verification (extracts last number, compares to GSM8K ground truth)</text>
     </svg>
   </div>
+
+  <!-- Compact results summary: baseline vs best -->
+  <div class="container is-max-widescreen" style="margin-top: 1.5rem;">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h3 class="title is-5 has-text-centered" style="margin-bottom: 0.75rem;">Results at a Glance</h3>
+        <div class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth" style="font-size: 0.9rem;">
+            <thead>
+              <tr>
+                <th>Experiment</th>
+                <th>Checkpoint</th>
+                <th>Plain Math Refusal</th>
+                <th>Jailbreak Refusal</th>
+                <th>General Helpfulness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2"><strong>v3</strong> (8B, utility-preserving)</td>
+                <td>baseline</td>
+                <td>84%</td>
+                <td>4%</td>
+                <td style="color: #257953; font-weight: 600;">100%</td>
+              </tr>
+              <tr>
+                <td><strong>step 499</strong></td>
+                <td style="color: #257953; font-weight: 600;">100%</td>
+                <td style="color: #946c00; font-weight: 600;">48%</td>
+                <td style="color: #257953; font-weight: 600;">100%</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>v2</strong> (8B, refusal only)</td>
+                <td>baseline</td>
+                <td>84%</td>
+                <td>4%</td>
+                <td style="color: #257953; font-weight: 600;">100%</td>
+              </tr>
+              <tr>
+                <td><strong>step 400</strong></td>
+                <td style="color: #946c00; font-weight: 600;">60%</td>
+                <td style="color: #257953; font-weight: 600;">88%</td>
+                <td style="color: #cc0f35; font-weight: 600;">44%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="font-size: 0.85rem; color: #666;">v3 preserves general helpfulness at 100% while maintaining full plain math refusal. v2 achieves higher jailbreak robustness but at severe utility cost.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- v3: Utility-Preserving Optimization -->
@@ -550,7 +601,7 @@ td.val-low { color: #cc0f35; font-weight: 600; }
               <div class="columns is-desktop">
                 <div class="column is-half">
                   <div class="notification is-warning is-light">
-                    <strong>Finding 3 &mdash; Jailbreak robustness trades off with utility:</strong> Max jailbreak refusal is 48% (v2 had 88%). The utility objective limits how aggressive the pixel perturbation can be against jailbreaks.
+                    <strong>Finding 3 &mdash; 48% = perfect split by jailbreak type:</strong> dev_mode: 12/12 (100%) refused. chatml_injection: 0/13 (0%) refused. chatml_injection uses actual chat template tokens (<code>&lt;|im_end|&gt;</code>, <code>&lt;|im_start|&gt;</code>) to inject a fake system message &mdash; this works at the tokenizer level and is immune to pixel optimization. dev_mode uses natural language claims, semantically similar to training jailbreaks, so transfer is perfect.
                   </div>
                 </div>
                 <div class="column is-half">
